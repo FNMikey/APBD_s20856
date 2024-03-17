@@ -9,6 +9,9 @@
             int[] tab = { 1, 2, 3, 4, 5, 6};
             double average = calculateAverage(tab);
             Console.WriteLine("Średnia to: " + average);
+
+            int maxValue = findMax(tab);
+            Console.WriteLine("Maksymalna wartość to: " + maxValue);
         }
 
 
@@ -23,5 +26,24 @@
             return sum / numbers.Length;
 
         }
+
+        public static int findMax(int[] numbers)
+        {
+      
+            int max = numbers[0];
+            foreach (int num in numbers)
+            {
+                if (num > max)
+                {
+                    max = num;
+                }
+            }
+
+            return max;
+        }
+
+
+
+
     }
 }
