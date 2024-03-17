@@ -14,13 +14,13 @@
 
         public static double calculateAverage(int[] numbers)
         {
-            double sum = 0;
+            double suma = 0;
             foreach (int num in numbers)
             {
-                sum += num;
+                suma += num;
             }
 
-            return sum / numbers.Length;
+            return suma / numbers.Length;
 
         }
     }
