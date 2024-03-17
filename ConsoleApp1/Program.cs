@@ -17,14 +17,13 @@
 
         public static double calculateAverage(int[] numbers)
         {
-            double sumaa = 0;
+            double suma = 0;
             foreach (int num in numbers)
             {
-                sumaa += num;
+                suma += num;
             }
 
-            return sumaa / numbers.Length;
-
+            return suma / numbers.Length;
         }
 
         public static int findMax(int[] numbers)
@@ -41,9 +40,6 @@
 
             return max;
         }
-
-
-
 
     }
 }
