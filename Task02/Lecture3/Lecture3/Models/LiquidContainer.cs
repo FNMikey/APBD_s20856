@@ -11,8 +11,8 @@ namespace Lecture3.Models
 
         public bool IsHazardous { get; set; }
 
-        public LiquidContainer(double ownWeight, int height, int depth, string serialNumber, double maxLoadCapacity, bool isHazardous)
-            : base(ownWeight, height, depth, serialNumber, maxLoadCapacity)
+        public LiquidContainer(double ownWeight, int height, int depth, double maxLoadCapacity, bool isHazardous)
+            : base(ownWeight, height, depth, maxLoadCapacity, ContainerType.L)
         {
             IsHazardous = isHazardous;
         }
@@ -25,12 +25,20 @@ namespace Lecture3.Models
                 NotifyHazard("Attempted to overload liquid container.");
                 throw new Exception("OverfillException");
             }
-            base.LoadContainer(loadMass);
+            LoadContainer(loadMass);
         }
 
         public void NotifyHazard(string message)
         {
-            Console.WriteLine($"Hazard Notification for {SerialNumber}");
+            Console.WriteLine($"{message} - serial number: {SerialNumber}");
+        }
+
+
+        public override void UnloadContainer()
+        {
+
+            LoadMass = 0;
+
         }
 
     }
