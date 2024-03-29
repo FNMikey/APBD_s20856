@@ -8,5 +8,6 @@ namespace Lecture3.Models
 {
     internal interface IHazardNotifier
     {
+        void NotifyHazard(string serialNumber);
     }
 }
