@@ -11,17 +11,24 @@ public class Program
         Ship ship = new Ship(100, 4, 30000);
 
         CooledContainer cooledContainer = new CooledContainer(100, 100, 100 , 1000, CooledContainer.ProductType.Butter);
-        Console.WriteLine(cooledContainer.ToString());
 
-        GasContainer gasContainer = new GasContainer(100, 100, 100, 10, 10);
-        Console.WriteLine(gasContainer.ToString());
+        GasContainer gasContainer = new GasContainer(100, 100, 100, 100, 100);
 
         LiquidContainer liquidContainer = new LiquidContainer(100, 100, 100, 100, true);
-        Console.WriteLine(liquidContainer.ToString());
+
+        LiquidContainer liquidContainer2 = new LiquidContainer(100, 100, 100, 100, true);
+
+        cooledContainer.LoadContainer(50);
+
+        gasContainer.LoadContainer(10);
 
         ship.AddContainer(gasContainer);
         ship.AddContainer(liquidContainer);
+        ship.AddContainer(liquidContainer2);
         ship.AddContainer(cooledContainer);
+
+        ship.RemoveContainer(liquidContainer2);
+        ship.RemoveContainer(liquidContainer2);
 
         ship.PrintShipInfo();
 

@@ -37,9 +37,9 @@ namespace Lecture3.Models
             Containers.Add(container);
         }
 
-        public bool RemoveContainer(string serialNumber)
+        public bool RemoveContainer(Container container)
         {
-            var container = Containers.FirstOrDefault(c => c.SerialNumber == serialNumber);
+            
             if (container != null)
             {
                 Containers.Remove(container);
