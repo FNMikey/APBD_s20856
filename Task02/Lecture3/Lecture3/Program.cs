@@ -22,6 +22,7 @@ public class Program
 
         gasContainer.LoadContainer(10);
 
+
         ship.AddContainer(gasContainer);
         ship.AddContainer(liquidContainer);
         ship.AddContainer(liquidContainer2);

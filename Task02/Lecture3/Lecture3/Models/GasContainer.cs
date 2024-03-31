@@ -23,7 +23,7 @@ namespace Lecture3.Models
                 NotifyHazard("Attempted to overload a gas container.");
                 throw new OverfillException("Attempted to overfill the container");
             }
-            LoadContainer(loadMass);
+            base.LoadContainer(loadMass);
         }
 
         public override void UnloadContainer()

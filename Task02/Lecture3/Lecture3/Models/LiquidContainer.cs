@@ -25,7 +25,7 @@ namespace Lecture3.Models
                 NotifyHazard("Attempted to overload liquid container.");
                 throw new Exception("OverfillException");
             }
-            LoadContainer(loadMass);
+            base.LoadContainer(loadMass);
         }
 
         public void NotifyHazard(string message)
