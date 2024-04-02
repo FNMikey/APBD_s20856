@@ -1,29 +1,34 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace LegacyApp
 {
     public class UserService
     {
+
+        private int minimumAge;
+        private int creditLimit;
+        
         public bool AddUser(string firstName, string lastName, string email, DateTime dateOfBirth, int clientId)
         {
-            if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName))
-            {
-                return false;
-            }
 
-            if (!email.Contains("@") && !email.Contains("."))
-            {
-                return false;
-            }
+            //Validation
+            if (!HasValidFullName(firstName, lastName)) {
 
-            var now = DateTime.Now;
-            int age = now.Year - dateOfBirth.Year;
-            if (now.Month < dateOfBirth.Month || (now.Month == dateOfBirth.Month && now.Day < dateOfBirth.Day)) age--;
-
-            if (age < 21)
-            {
                 return false;
-            }
+            };
+
+            if (!HasValidEmail(email)) {
+
+                return false;
+            };
+
+            if (!HasMinimumAgeRequired(dateOfBirth))
+            {
+
+                return false;
+            };
+
 
             var clientRepository = new ClientRepository();
             var client = clientRepository.GetById(clientId);
@@ -60,13 +65,47 @@ namespace LegacyApp
                 }
             }
 
-            if (user.HasCreditLimit && user.CreditLimit < 500)
-            {
+            if (HasCreditLimitBelow500(user)) {
+
                 return false;
             }
 
             UserDataAccess.AddUser(user);
             return true;
+
         }
+        public bool HasValidFullName(string firstName, string lastName)
+        {
+
+            return !string.IsNullOrEmpty(firstName) && !string.IsNullOrEmpty(lastName);
+
+        }
+
+        public bool HasValidEmail(string email) {
+
+            return email.Contains("@") || email.Contains(".");
+
+        }
+
+        public bool HasMinimumAgeRequired(DateTime dateOfBirth) {
+
+            var now = DateTime.Now;
+            int age = now.Year - dateOfBirth.Year;
+
+            if (now.Month < dateOfBirth.Month || (now.Month == dateOfBirth.Month && now.Day < dateOfBirth.Day))
+                age--;
+
+            return age > minimumAge;
+
+        }
+
+        public bool HasCreditLimitBelow500(User user) {
+
+            return user.HasCreditLimit && user.CreditLimit < creditLimit;            
+
+
+
+        }
+
     }
 }
