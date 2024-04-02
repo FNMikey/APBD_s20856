@@ -8,17 +8,19 @@ namespace LegacyApp
 
         private int minimumAge;
         private int creditLimit;
-        
+
         public bool AddUser(string firstName, string lastName, string email, DateTime dateOfBirth, int clientId)
         {
 
             //Validation
-            if (!HasValidFullName(firstName, lastName)) {
+            if (!HasValidFullName(firstName, lastName))
+            {
 
                 return false;
             };
 
-            if (!HasValidEmail(email)) {
+            if (!HasValidEmail(email))
+            {
 
                 return false;
             };
@@ -44,13 +46,15 @@ namespace LegacyApp
 
             user.SetCreditLimit(lastName);
 
-            if (HasCreditLimitBelow500(user)) {
+            if (HasCreditLimitBelow500(user))
+            {
 
                 return false;
             }
 
             UserDataAccess.AddUser(user);
             return true;
+
 
 
 
@@ -64,13 +68,15 @@ namespace LegacyApp
 
         }
 
-        public bool HasValidEmail(string email) {
+        public bool HasValidEmail(string email)
+        {
 
             return email.Contains("@") || email.Contains(".");
 
         }
 
-        public bool HasMinimumAgeRequired(DateTime dateOfBirth) {
+        public bool HasMinimumAgeRequired(DateTime dateOfBirth)
+        {
 
             var now = DateTime.Now;
             int age = now.Year - dateOfBirth.Year;
@@ -82,9 +88,10 @@ namespace LegacyApp
 
         }
 
-        public bool HasCreditLimitBelow500(User user) {
+        public bool HasCreditLimitBelow500(User user)
+        {
 
-            return user.HasCreditLimit && user.CreditLimit < creditLimit;            
+            return user.HasCreditLimit && user.CreditLimit < creditLimit;
 
 
 
