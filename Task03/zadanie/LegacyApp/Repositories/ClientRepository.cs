@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using LegacyApp.Models;
 
-namespace LegacyApp
+namespace LegacyApp.Repositories
 {
     public class ClientRepository
     {
@@ -18,7 +19,7 @@ namespace LegacyApp
             {5, new Client{ClientId = 5, Name = "Kwiatkowski", Address = "Warszawa, Złota 52", Email = "kwiatkowski@wp.pl", Type = "NormalClient"}},
             {6, new Client{ClientId = 6, Name = "Andrzejewicz", Address = "Warszawa, Koszykowa 52", Email = "andrzejewicz@wp.pl", Type = "NormalClient"}}
         };
-        
+
         public ClientRepository()
         {
         }

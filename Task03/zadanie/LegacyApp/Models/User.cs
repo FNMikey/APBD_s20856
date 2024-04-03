@@ -1,6 +1,7 @@
-﻿using System;
+﻿using LegacyApp.Services;
+using System;
 
-namespace LegacyApp
+namespace LegacyApp.Models
 {
     public class User
     {
@@ -12,30 +13,30 @@ namespace LegacyApp
         public bool HasCreditLimit { get; internal set; }
         public int CreditLimit { get; internal set; }
 
-        public void SetCreditLimit(String lastName)
+        public void SetCreditLimit(string lastName)
         {
             switch (lastName)
             {
 
                 case "VeryImportantClient":
-                    this.HasCreditLimit = false;
+                    HasCreditLimit = false;
                     break;
 
                 case "ImportantClient":
                     using (var userCreditService = new UserCreditService())
                     {
-                        int creditLimit = userCreditService.GetCreditLimit(this.LastName, this.DateOfBirth);
+                        int creditLimit = userCreditService.GetCreditLimit(LastName, DateOfBirth);
                         creditLimit = creditLimit * 2;
-                        this.CreditLimit = creditLimit;
+                        CreditLimit = creditLimit;
                     }
                     break;
 
                 default:
-                    this.HasCreditLimit = true;
+                    HasCreditLimit = true;
                     using (var userCreditService = new UserCreditService())
                     {
-                        int creditLimit = userCreditService.GetCreditLimit(this.LastName, this.DateOfBirth);
-                        this.CreditLimit = creditLimit;
+                        int creditLimit = userCreditService.GetCreditLimit(LastName, DateOfBirth);
+                        CreditLimit = creditLimit;
                     }
                     break;
             }
