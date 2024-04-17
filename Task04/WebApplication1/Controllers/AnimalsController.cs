@@ -38,7 +38,7 @@ public class AnimalsController : ControllerBase
     {
         var index = _animals.FindIndex(a => a.Id == id);
         if (index == -1)
-            return NotFound();
+            return NotFound($"Animal with id: {id} was not found");
 
         _animals[index] = animal;
         return Ok();
