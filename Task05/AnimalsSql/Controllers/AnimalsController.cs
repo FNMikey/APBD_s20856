@@ -3,7 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AnimalsSql.Controllers
 {
-    public class AnimalsController : Controller
+
+    [Route("api/[controller]")]
+    [ApiController]
+    public class AnimalsController : ControllerBase
     {
 
         private IAnimalsService _animalsService;
