@@ -1,4 +1,7 @@
 
+using AnimalsSql.Repositories;
+using AnimalsSql.Services;
+
 namespace AnimalsSql
 {
     public class Program
@@ -13,6 +16,8 @@ namespace AnimalsSql
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddScoped<IAnimalsRepository, AnimalsRepository>();
+            builder.Services.AddScoped<IAnimalsService, AnimalsService>();
 
             var app = builder.Build();
 

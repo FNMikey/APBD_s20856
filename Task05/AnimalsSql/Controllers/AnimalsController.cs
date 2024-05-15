@@ -1,12 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AnimalsSql.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AnimalsSql.Controllers
 {
     public class AnimalsController : Controller
     {
-        public IActionResult Index()
+
+        private IAnimalsService _animalsService;
+
+        public AnimalsController(IAnimalsService animalsService)
         {
-            return View();
+            _animalsService = animalsService; 
+        }
+
+        [HttpGet]
+        public IActionResult GetAnimals()
+        {
+            var animals = _animalsService.GetAnimals();
+            return Ok(animals);
         }
     }
 }
