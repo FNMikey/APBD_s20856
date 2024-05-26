@@ -8,9 +8,9 @@ namespace AnimalsSql.Repositories
 
         int CreateAnimal(Animal animal);
 
-        int UpdateAnimal(Animal animal);
+        int UpdateAnimal(Animal animal, int IdAnimal);
 
-        int DeleteAnimal(Animal animal);
+        int DeleteAnimal(int IdAnimal);
 
 
 

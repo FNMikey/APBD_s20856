@@ -23,17 +23,17 @@ namespace AnimalsSql.Services
 
         public int CreateAnimal(Animal animal)
         {
-            throw new NotImplementedException();
+            return _animalsRepository.CreateAnimal(animal);
         }
 
-        public int DeleteAnimal(Animal animal)
+        public int DeleteAnimal(int IdAnimal)
         {
-            throw new NotImplementedException();
+            return _animalsRepository.DeleteAnimal(IdAnimal);
         }
 
-        public int UpdateAnimal(Animal animal)
+        public int UpdateAnimal(Animal animal, int IdAnimal)
         {
-            throw new NotImplementedException();
+            return _animalsRepository.UpdateAnimal(animal,IdAnimal);
         }
     }
 }

@@ -15,13 +15,13 @@ namespace AnimalsSql.Repositories
 
         public IEnumerable<Animal> GetAnimals()
         {
-            //mam problem z podłączeniem do bazy danych :/
-            using var con = new SqlConnection(_configuration["Data Source=db-mssql16.pjwstk.edu.pl;Initial Catalog=s20856;Integrated Security=True"]);
+            
+            using var con = new SqlConnection(_configuration["Data Source=localhost; Database=APBD5; Initial Catalog=s20856;Integrated Security=True"]);
             con.Open();
 
             using var cmd = new SqlCommand();
             cmd.Connection = con;
-            cmd.CommandText = "select table_name from INFORMATION_SCHEMA.TABLES";
+            cmd.CommandText = "SELECT IdAnimal, Name, Description, Category, Area FROM Animal ORDER BY Name";
 
             var dr = cmd.ExecuteReader();
             var animals = new List<Animal>();
@@ -43,17 +43,55 @@ namespace AnimalsSql.Repositories
 
         public int CreateAnimal(Animal animal)
         {
-            throw new NotImplementedException();
+            using var con = new SqlConnection(_configuration["Data Source=localhost; Database=APBD5; Initial Catalog=s20856;Integrated Security=True"]);
+            con.Open();
+
+            using var cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = "INSERT INTO Animals.Animal(Name, Description, Category, Area) VALUES(@Name, @Description, @Category, @Area)";
+            cmd.Parameters.AddWithValue("@Name", animal.Name);
+            if (animal.Description == null)
+                animal.Description = "";
+            cmd.Parameters.AddWithValue("@Description", animal.Description);
+            cmd.Parameters.AddWithValue("@Category", animal.Category);
+            cmd.Parameters.AddWithValue("@Area", animal.Area);
+
+            var affectedCount = cmd.ExecuteNonQuery();
+            return affectedCount;
         }
 
-        public int DeleteAnimal(Animal animal)
+        public int DeleteAnimal(int IdAnimal)
         {
-            throw new NotImplementedException();
+            using var con = new SqlConnection(_configuration["Data Source=localhost; Database=APBD5; Initial Catalog=s20856;Integrated Security=True"]);
+            con.Open();
+
+            using var cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = "DELETE FROM Animals.Animal WHERE IdAnimal = @IdAnimal";
+            cmd.Parameters.AddWithValue("@IdAnimal", IdAnimal);
+
+            var affectedCount = cmd.ExecuteNonQuery();
+            return affectedCount;
         }
 
-        public int UpdateAnimal(Animal animal)
+        public int UpdateAnimal(Animal animal, int IdAnimal)
         {
-            throw new NotImplementedException();
+            using var con = new SqlConnection(_configuration["Data Source=localhost; Database=APBD5; Initial Catalog=s20856;Integrated Security=True"]);
+            con.Open();
+
+            using var cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = "UPDATE Animals.Animal SET Name=@Name, Description=@Description, Category=@Category, Area=@Area WHERE IdAnimal = @IdAnimal";
+            cmd.Parameters.AddWithValue("@Name", animal.Name);
+            if (animal.Description == null)
+                animal.Description = "";
+            cmd.Parameters.AddWithValue("@Description", animal.Description);
+            cmd.Parameters.AddWithValue("@Category", animal.Category);
+            cmd.Parameters.AddWithValue("@Area", animal.Area);
+            cmd.Parameters.AddWithValue("@IdAnimal", IdAnimal);
+
+            var affectedCount = cmd.ExecuteNonQuery();
+            return affectedCount;
         }
     }
 }
