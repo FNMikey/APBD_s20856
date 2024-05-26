@@ -225,7 +225,16 @@ namespace LinqTutorials
         /// </summary>
         public static IEnumerable<object> Task6()
         {
-            IEnumerable<object> result = null;
+            IEnumerable<object> result = Emps.Join(Depts, emp => emp.Deptno, dept => dept.Deptno, (emp, dept) =>
+
+            new {
+
+                Ename = emp.Ename,
+                Job = emp.Job,
+                Dname = dept.Dname,
+
+            }).Select(emp => emp);
+
             return result;
         }
 
@@ -234,7 +243,12 @@ namespace LinqTutorials
         /// </summary>
         public static IEnumerable<object> Task7()
         {
-            IEnumerable<object> result = null;
+            IEnumerable<object> result = Emps.GroupBy(emp => emp.Job).Select(emp => new {
+
+                Praca = emp.Key,
+                LiczbaPracowników = emp.Count()
+
+            });
             return result;
         }
 
