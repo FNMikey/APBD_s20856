@@ -15,12 +15,13 @@ namespace AnimalsSql.Repositories
 
         public IEnumerable<Animal> GetAnimals()
         {
-            using var con = new SqlConnection(_configuration["ConnectionStrings:DefaultConnection"]);
+            //mam problem z podłączeniem do bazy danych :/
+            using var con = new SqlConnection(_configuration["Data Source=db-mssql16.pjwstk.edu.pl;Initial Catalog=s20856;Integrated Security=True"]);
             con.Open();
 
             using var cmd = new SqlCommand();
             cmd.Connection = con;
-            cmd.CommandText = "SELECT IdAnimal, Name, Description, Category, Area FROM Animal ORDER BY Name";
+            cmd.CommandText = "select table_name from INFORMATION_SCHEMA.TABLES";
 
             var dr = cmd.ExecuteReader();
             var animals = new List<Animal>();
