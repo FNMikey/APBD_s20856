@@ -258,7 +258,8 @@ namespace LinqTutorials
         /// </summary>
         public static bool Task8()
         {
-            bool result = false;
+            bool result = Emps.Any(emp => emp.Job == "Backend programmer");
+
             return result;
         }
 
@@ -268,7 +269,7 @@ namespace LinqTutorials
         /// </summary>
         public static Emp Task9()
         {
-            Emp result = null;
+            Emp result = Emps.OrderByDescending(emp => emp.HireDate).First(emp => emp.Job == "Frontend programmer");
             return result;
         }
 
